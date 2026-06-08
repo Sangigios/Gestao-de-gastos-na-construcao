@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Gastos de Obra</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>🏗️ Gestão de Gastos da Obra</h1>
+    </header>
+
+    <main class="container">
+        
+        <div style="margin-bottom: 25px; text-align: right;">
+            <button id="btn-pdf" class="btn-exportar">📥 Baixar Arquivo PDF Automático</button>
+            <button id="btn-limpar" class="btn-limpar">🗑️ Zerar Dados da Obra</button>
+        </div>
+
+        <div id="relatorio-conteudo">
+            
+            <div class="print-header">
+                <h1>Relatório de Custos e Gastos da Obra</h1>
+                <p id="print-data-emissao"></p>
+            </div>
+
+            <section class="dashboard">
+                <div class="card card-materiais">
+                    <h3>Total em Materiais</h3>
+                    <p id="total-materiais">R$ 0,00</p>
+                </div>
+                <div class="card card-servicos">
+                    <h3>Total Pago em Serviços</h3>
+                    <p id="total-servicos">R$ 0,00</p>
+                </div>
+                <div class="card card-geral">
+                    <h3>Gasto Total da Obra (Pago)</h3>
+                    <p id="gasto-total">R$ 0,00</p>
+                </div>
+            </section>
+
+            <section class="tabelas-section">
+                <h2>Histórico de Materiais</h2>
+                <div class="table-wrapper">
+                    <table id="tabela-materiais">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Produto</th>
+                                <th>Fornecedor</th>
+                                <th>Qtd.</th>
+                                <th>Unitário</th>
+                                <th>Total</th>
+                                <th class="no-print">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="tabelas-section">
+                <h2>Histórico de Serviços e Pagamentos</h2>
+                <div class="table-wrapper">
+                    <table id="tabela-servicos">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Prestador</th>
+                                <th>Tipo de Lançamento</th>
+                                <th>Descrição / Detalhes</th>
+                                <th>Valor</th>
+                                <th class="no-print">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="tabelas-section">
+                <h2>📊 Resumo de Contas por Prestador (Saldos)</h2>
+                <div class="table-wrapper">
+                    <table id="tabela-saldos-prestadores">
+                        <thead>
+                            <tr>
+                                <th>Prestador de Serviço</th>
+                                <th>Valor Total Combinado (Diárias / Contratos)</th>
+                                <th>Total Pago até Agora</th>
+                                <th>Restante a Pagar</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <div class="grid-formularios" style="margin-top: 40px; border-top: 2px dashed #ccc; padding-top: 30px;">
+            <section class="form-section no-print">
+                <h2 id="titulo-form-material">Comprar Material</h2>
+                <form id="form-material">
+                    <div class="input-group">
+                        <label for="mat-data">Data</label>
+                        <input type="date" id="mat-data" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="mat-produto">Produto</label>
+                        <input type="text" id="mat-produto" placeholder="Ex: Cimento" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="mat-fornecedor">Fornecedor</label>
+                        <input type="text" id="mat-fornecedor" placeholder="Ex: Depósito Silva" required>
+                    </div>
+                    <div class="grid-inputs-curtos">
+                        <div class="input-group">
+                            <label for="mat-qtd">Quantidade</label>
+                            <input type="number" id="mat-qtd" min="0.01" step="any" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="mat-valor">Valor Unitário (R$)</label>
+                            <input type="number" id="mat-valor" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    <button type="submit" id="btn-submit-material" class="btn btn-material">Adicionar Material</button>
+                </form>
+            </section>
+
+            <section class="form-section no-print">
+                <h2 id="titulo-form-servico">Lançar Movimentação de Serviço</h2>
+                <form id="form-servico">
+                    <div class="input-group">
+                        <label for="srv-data">Data</label>
+                        <input type="date" id="srv-data" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="srv-prestador">Nome do Prestador</label>
+                        <input type="text" id="srv-prestador" placeholder="Ex: Marcos Pedreiro" required>
+                    </div>
+                    
+                    <div class="grid-inputs-curtos">
+                        <div class="input-group">
+                            <label for="srv-tipo">Tipo de Lançamento</label>
+                            <select id="srv-tipo" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem;">
+                                <option value="diaria">👷 Diária Trabalhada (+)</option>
+                                <option value="contrato">📜 Contrato Fechado / Empreitada (+)</option>
+                                <option value="pagamento">💵 Pagamento Realizado (-)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="srv-valor">Valor (R$)</label>
+                            <input type="number" id="srv-valor" min="0.01" step="0.01" placeholder="Ex: 230.00" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="srv-descricao">Descrição / Observação</label>
+                        <input type="text" id="srv-descricao" placeholder="Ex: Instalação elétrica completa / Adiantamento de entrada">
+                    </div>
+                    
+                    <button type="submit" id="btn-submit-servico" class="btn btn-servico">Adicionar Lançamento</button>
+                </form>
+            </section>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+:root {
+    --bg-color: #f4f6f9;
+    --card-bg: #ffffff;
+    --primary-color: #2c3e50;
+    --material-color: #27ae60;
+    --servico-color: #2980b9;
+    --danger-color: #c0392b;
+    --text-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding-bottom: 40px;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Dashboard / Cards */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-left: 5px solid;
+}
+
+.card h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.card-materiais { border-left-color: var(--material-color); }
+.card-servicos { border-left-color: var(--servico-color); }
+.card-geral { border-left-color: var(--primary-color); }
+
+/* Formulários */
+.grid-formularios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.form-section {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-section h2 {
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.grid-inputs-curtos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-material { background-color: var(--material-color); }
+.btn-material:hover { background-color: #219653; }
+
+.btn-servico { background-color: var(--servico-color); }
+.btn-servico:hover { background-color: #1f6b9c; }
+
+/* Tabelas */
+.tabelas-section {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.tabelas-section h2 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* Botões da Tabela */
+.btn-editar {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    transition: background 0.2s;
+}
+.btn-editar:hover { background-color: #e67e22; }
+
+.btn-deletar {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.2s;
+}
+.btn-deletar:hover { background-color: #a93226; }
+
+td .btn-editar, td .btn-deletar {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Botão de Exportar PDF */
+.btn-exportar {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-exportar:hover { background-color: #d35400; }
+
+/* Cabeçalho do PDF na tela normal */
+.print-header {
+    display: block;
+    margin-bottom: 25px;
+    border-bottom: 3px solid #2c3e50;
+    padding-bottom: 10px;
+}
+.print-header h1 { font-size: 20px; color: #2c3e50; }
+.print-header p { font-size: 13px; color: #7f8c8d; margin-top: 5px; }
+
+@media (max-width: 480px) {
+    .grid-formularios {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   AQUI ESTÁ A CORRECÇÃO: Ocultar APENAS quando gerar o PDF
+============================================================ */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* Botão de Limpar Tudo */
+.btn-limpar {
+    background-color: #7f8c8d;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px; /* Dá um espaço em relação ao botão de PDF */
+    transition: background 0.2s;
+}
+
+.btn-limpar:hover {
+    background-color: #c0392b; /* Fica vermelho ao passar o mouse */
+}
+
+/* Garante que o botão de limpar também suma se você usar a impressão nativa */
+@media print {
+    .btn-limpar {
+        display: none !important;
+    }
+}
+
+/* Pequeno ajuste para os botões da tabela ficarem alinhados */
+/*td .btn-editar, td .btn-deletar {
+    display: inline-block;
+    vertical-align: middle;
+}*/
+
+/* Esconde elementos indesejados no arquivo PDF */
+/*.no-print {
+    display: none !important;
+}*/
