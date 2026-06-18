@@ -85,10 +85,13 @@ function atualizarResumosESaldos() {
     });
 }
 
-// Renderiza a tabela de Materiais
+// Renderiza a tabela de Materiais (AGORA ORDENADA POR DATA)
 function renderizarMateriais() {
     const tbody = document.querySelector('#tabela-materiais tbody');
     tbody.innerHTML = '';
+
+    // ORDENAÇÃO AUTOMÁTICA: Organiza os materiais do dia mais antigo para o mais recente
+    materiais.sort((a, b) => new Date(a.data) - new Date(b.data));
 
     materiais.forEach((item, index) => {
         const valorTotalCompra = item.qtd * item.valor;
@@ -109,15 +112,17 @@ function renderizarMateriais() {
     });
 }
 
-// Renderiza o Histórico de Lançamentos de Serviço
+// Renderiza o Histórico de Lançamentos de Serviço (AGORA ORDENADO POR DATA)
 function renderizarServicos() {
     const tbody = document.querySelector('#tabela-servicos tbody');
     tbody.innerHTML = '';
 
+    // ORDENAÇÃO AUTOMÁTICA: Organiza os serviços do dia mais antigo para o mais recente
+    servicos.sort((a, b) => new Date(a.data) - new Date(b.data));
+
     servicos.forEach((item, index) => {
         const tr = document.createElement('tr');
         
-        // Tags visuais atualizadas para incluir o contrato fechado
         let badgeTipo = '';
         let estiloValor = '';
         let sinalValor = '';
